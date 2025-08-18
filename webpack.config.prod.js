@@ -3,8 +3,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   entry: './index.js',
@@ -58,7 +58,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('node-sass'),
+              implementation: require('sass'),
               sassOptions: {
                 includePaths: [path.resolve(__dirname, 'src/scss/')]
               }
@@ -101,11 +101,8 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true
-      }),
-      new OptimizeCSSAssetsPlugin({})
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
     ]
   }
 };

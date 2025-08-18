@@ -13,7 +13,9 @@ module.exports = {
   target: 'web',
   mode: 'development',
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    static: {
+      directory: path.resolve(__dirname, './dist'),
+    },
     compress: false,
     host: '0.0.0.0',
     port: 3000,
@@ -56,7 +58,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('node-sass'),
+              implementation: require('sass'),
               sassOptions: {
                 includePaths: [path.resolve(__dirname, 'src/scss/')]
               }

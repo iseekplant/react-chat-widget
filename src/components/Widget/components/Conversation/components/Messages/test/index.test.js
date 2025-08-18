@@ -12,7 +12,6 @@ import Snippet from '../components/Snippet';
 configure({ adapter: new Adapter() });
 
 describe('<Messages />', () => {
-  
   /* eslint-disable react/prop-types */
   const Dummy = ({ text }) => <div>{text}</div>;
   /* eslint-enable */
@@ -23,7 +22,7 @@ describe('<Messages />', () => {
 
   const messagesComponent = mount(
     <Provider store={ mockStore }>
-       <Messages />
+      <Messages />
     </Provider>
   );
 
