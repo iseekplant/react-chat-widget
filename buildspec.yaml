@@ -1,0 +1,22 @@
+version: 0.2
+
+env:
+  shell: bash
+  secrets-manager:
+    GITHUB_PACKAGE_TOKEN: "Production:GITHUB_PACKAGE_TOKEN"
+  git-credential-helper: no
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - CI_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+      - echo "//npm.pkg.github.com/:_authToken=$GITHUB_PACKAGE_TOKEN" > /root/.npmrc
+      - npm cache clean --force
+      - npm install --prefer-offline --no-audit
+  build:
+    commands:
+      - npm run build
+      - npm run test
+      - npm run publish
