@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import {useSelector, useDispatch, shallowEqual} from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import cn from 'classnames';
 
 import { GlobalState } from 'src/store/types';

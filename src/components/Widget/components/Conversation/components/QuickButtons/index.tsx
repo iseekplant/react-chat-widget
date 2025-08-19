@@ -1,4 +1,4 @@
-import {shallowEqual, useSelector} from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { GlobalState, QuickButtonTypes } from 'src/store/types';
 import { AnyFunction } from 'src/utils/types';

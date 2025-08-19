@@ -123,7 +123,7 @@ function Conversation({
       {emojis && pickerStatus && (
           <EmojiPicker
             style={{ position: 'absolute', bottom: pickerOffset, left: '0', width: '100%' }}
-            onSelect={onSelectEmoji}
+            onEmojiSelect={onSelectEmoji}
           />
       )}
       <Sender

@@ -1,4 +1,4 @@
-import {useSelector, useDispatch, shallowEqual} from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import cn from 'classnames';
 
 import Badge from './components/Badge';

@@ -1,6 +1,6 @@
 import { useEffect, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
-import {useSelector, useDispatch, shallowEqual} from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import usePreview from './usePreview';
 import usePortal from './usePortal';
 import './styles.scss';

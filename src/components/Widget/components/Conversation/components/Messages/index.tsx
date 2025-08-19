@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import {useSelector, useDispatch, shallowEqual} from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import format from 'date-fns/format';
 
 import { scrollToBottom } from '../../../../../../utils/messages';
