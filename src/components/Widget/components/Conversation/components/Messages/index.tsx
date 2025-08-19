@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState, ElementRef, ImgHTMLAttributes, MouseEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import format from 'date-fns/format';
 
 import { scrollToBottom } from '../../../../../../utils/messages';
 import { MessageTypes, Link, CustomCompMessage, GlobalState } from '../../../../../../store/types';
 import { setBadgeCount, markAllMessagesRead } from '../../../../../../store/actions';
 import { MESSAGE_SENDER } from '../../../../../../constants';
-
 import Loader from './components/Loader';
 import './styles.scss';
 
@@ -18,14 +17,16 @@ type Props = {
 
 function Messages({ profileAvatar, profileClientAvatar, showTimeStamp }: Props) {
   const dispatch = useDispatch();
+
   const { messages, typing, showChat, badgeCount } = useSelector((state: GlobalState) => ({
     messages: state.messages.messages,
     badgeCount: state.messages.badgeCount,
     typing: state.behavior.messageLoader,
-    showChat: state.behavior.showChat
-  }));
+    showChat: state.behavior.showChat,
+  }), { equalityFn: shallowEqual });
 
   const messageRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     // @ts-ignore
     scrollToBottom(messageRef.current);

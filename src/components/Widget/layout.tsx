@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import cn from 'classnames';
 
 import { GlobalState } from 'src/store/types';
@@ -74,7 +74,7 @@ function WidgetLayout({
     showChat: state.behavior.showChat,
     dissableInput: state.behavior.disabledInput,
     visible: state.preview.visible,
-  }));
+  }), { equalityFn: shallowEqual });
 
   const messageRef = useRef<HTMLDivElement | null>(null);
 

@@ -34,34 +34,34 @@ type Props = {
   handleSubmit?: AnyFunction;
   showBadge?: boolean;
   resizable?: boolean;
-} & typeof defaultProps;
+};
 
 function ConnectedWidget({
-  title,
+  title = 'Welcome',
   titleAvatar,
-  subtitle,
-  senderPlaceHolder,
-  showCloseButton,
-  fullScreenMode,
-  autofocus,
+  subtitle = 'This is your chat subtitle',
+  senderPlaceHolder = 'Type a message...',
+  showCloseButton = true,
+  fullScreenMode = false,
+  autofocus = true,
   profileAvatar,
   profileClientAvatar,
   launcher,
   handleNewUserMessage,
   handleQuickButtonClicked,
   handleTextInputChange,
-  chatId,
+  chatId = 'rcw-chat-container',
   handleToggle,
-  launcherOpenLabel,
-  launcherCloseLabel,
-  launcherCloseImg,
-  launcherOpenImg,
-  sendButtonAlt,
-  showTimeStamp,
-  imagePreview,
-  zoomStep,
+  launcherOpenLabel = 'Open chat',
+  launcherCloseLabel = 'Close chat',
+  launcherCloseImg = '',
+  launcherOpenImg = '',
+  sendButtonAlt = 'Send',
+  showTimeStamp = true,
+  imagePreview = false,
+  zoomStep = 80,
   handleSubmit,
-  showBadge,
+  showBadge = true,
   resizable,
   emojis
 }: Props) {
@@ -99,25 +99,5 @@ function ConnectedWidget({
     </Provider>
   );
 }
-
-const defaultProps = {
-  title: 'Welcome',
-  subtitle: 'This is your chat subtitle',
-  senderPlaceHolder: 'Type a message...',
-  showCloseButton: true,
-  fullScreenMode: false,
-  autofocus: true,
-  chatId: 'rcw-chat-container',
-  launcherOpenLabel: 'Open chat',
-  launcherCloseLabel: 'Close chat',
-  launcherOpenImg: '',
-  launcherCloseImg: '',
-  sendButtonAlt: 'Send',
-  showTimeStamp: true,
-  imagePreview: false,
-  zoomStep: 80,
-  showBadge: true,
-};
-ConnectedWidget.defaultProps = defaultProps;
 
 export default ConnectedWidget;

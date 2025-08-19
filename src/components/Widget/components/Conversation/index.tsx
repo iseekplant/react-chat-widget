@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Picker } from 'emoji-mart';
 import cn from 'classnames';
 
@@ -120,10 +120,12 @@ function Conversation({
         showTimeStamp={showTimeStamp}
       />
       <QuickButtons onQuickButtonClicked={onQuickButtonClicked} />
-      {emojis && pickerStatus && (<Picker 
-        style={{ position: 'absolute', bottom: pickerOffset, left: '0', width: '100%' }}
-        onSelect={onSelectEmoji}
-      />)}
+      {emojis && pickerStatus && (
+          <EmojiPicker
+            style={{ position: 'absolute', bottom: pickerOffset, left: '0', width: '100%' }}
+            onEmojiSelect={onSelectEmoji}
+          />
+      )}
       <Sender
         ref={senderRef}
         sendMessage={handlerSendMsn}
@@ -136,6 +138,27 @@ function Conversation({
         onChangeSize={setOffset}
       />
     </div>
+  );
+}
+
+const EmojiPicker = (props) => {
+  const ref = useRef(null)
+  const instance = useRef<Picker>(null)
+
+  if (instance.current) {
+    instance.current.update(props);
+  }
+
+  useEffect(() => {
+    instance.current = new Picker({ ...props, ref });
+
+    return () => {
+      instance.current = null;
+    }
+  }, []);
+
+  return (
+      <div ref={ref}></div>
   );
 }
 

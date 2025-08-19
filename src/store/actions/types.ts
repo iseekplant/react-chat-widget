@@ -1,6 +1,6 @@
 import { ElementType } from 'react';
-
 import { LinkParams, FullscreenPreviewState } from '../types';
+import { UnknownAction } from 'redux';
 
 export const TOGGLE_CHAT = 'BEHAVIOR/TOGGLE_CHAT';
 export const TOGGLE_INPUT_DISABLED = 'BEHAVIOR/TOGGLE_INPUT_DISABLED';
@@ -18,72 +18,53 @@ export const SET_QUICK_BUTTONS = 'SET_QUICK_BUTTONS';
 export const OPEN_FULLSCREEN_PREVIEW = 'FULLSCREEN/OPEN_PREVIEW';
 export const CLOSE_FULLSCREEN_PREVIEW = 'FULLSCREEN/CLOSE_PREVIEW';
 
-export interface ToggleChat {
-  type: typeof TOGGLE_CHAT;
-}
+export interface ToggleChat extends UnknownAction {}
 
-export interface ToggleInputDisabled {
-  type: typeof TOGGLE_INPUT_DISABLED;
-}
+export interface ToggleInputDisabled extends UnknownAction {}
 
-export interface AddUserMessage {
-  type: typeof ADD_NEW_USER_MESSAGE;
+export interface AddUserMessage extends UnknownAction {
   text: string;
   id?: string;
 }
 
-export interface AddResponseMessage {
-  type: typeof ADD_NEW_RESPONSE_MESSAGE;
+export interface AddResponseMessage extends UnknownAction {
   text: string;
   id?: string;
 }
 
-export interface ToggleMsgLoader {
-  type: typeof TOGGLE_MESSAGE_LOADER;
-}
+export interface ToggleMsgLoader extends UnknownAction {}
 
-export interface AddLinkSnippet {
-  type: typeof ADD_NEW_LINK_SNIPPET;
+export interface AddLinkSnippet extends UnknownAction {
   link: LinkParams;
   id?: string;
 }
 
-export interface RenderCustomComponent {
-  type: typeof ADD_COMPONENT_MESSAGE;
+export interface RenderCustomComponent extends UnknownAction {
   component: ElementType;
   props: any;
   showAvatar: boolean;
   id?: string;
 }
 
-export interface DropMessages {
-  type: typeof DROP_MESSAGES;
-}
+export interface DropMessages extends UnknownAction {}
 
-export interface HideAvatar {
-  type: typeof HIDE_AVATAR;
+export interface HideAvatar extends UnknownAction {
   index: number;
 }
 
-export interface DeleteMessages {
-  type: typeof DELETE_MESSAGES;
-  count: number;
+export interface DeleteMessages extends UnknownAction {
   id?: string;
 }
 
-export interface SetQuickButtons {
-  type: typeof SET_QUICK_BUTTONS;
+export interface SetQuickButtons extends UnknownAction {
   buttons: Array<{ label: string, value: string | number }>;
 }
 
-export interface SetBadgeCount {
-  type: typeof SET_BADGE_COUNT;
+export interface SetBadgeCount extends UnknownAction {
   count: number;
 }
 
-export interface MarkAllMessagesRead {
-  type: typeof MARK_ALL_READ;
-}
+export interface MarkAllMessagesRead extends UnknownAction {}
 
 export type BehaviorActions = ToggleChat | ToggleInputDisabled | ToggleMsgLoader;
 
@@ -92,13 +73,10 @@ export type MessagesActions = AddUserMessage | AddResponseMessage | AddLinkSnipp
 
 export type QuickButtonsActions = SetQuickButtons;
 
-export interface openFullscreenPreview {
-  type: typeof OPEN_FULLSCREEN_PREVIEW;
+export interface openFullscreenPreview extends UnknownAction {
   payload: FullscreenPreviewState
 }
 
-export interface closeFullscreenPreview {
-  type: typeof CLOSE_FULLSCREEN_PREVIEW;
-}
+export interface closeFullscreenPreview extends UnknownAction {}
 
 export type FullscreenPreviewActions = openFullscreenPreview | closeFullscreenPreview;

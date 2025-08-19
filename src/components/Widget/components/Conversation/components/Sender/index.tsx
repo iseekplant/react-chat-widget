@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, forwardRef, useImperativeHandle } from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import { GlobalState } from 'src/store/types';
@@ -23,7 +23,10 @@ type Props = {
 }
 
 function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInputChange, buttonAlt, onPressEmoji, onChangeSize }: Props, ref) {
-  const showChat = useSelector((state: GlobalState) => state.behavior.showChat);
+  const showChat = useSelector(
+    (state: GlobalState) => state.behavior.showChat,
+    { equalityFn: shallowEqual },
+  );
   const inputRef = useRef<HTMLDivElement>(null!);
   const refContainer = useRef<HTMLDivElement>(null);
   const [enter, setEnter]= useState(false)
@@ -139,7 +142,6 @@ function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInpu
           role="textbox"
           contentEditable={!disabledInput} 
           ref={inputRef}
-          placeholder={placeholder}
           onInput={handlerOnChange}
           onKeyPress={handlerOnKeyPress}
           onKeyUp={handlerOnKeyUp}
