@@ -1,30 +1,17 @@
-import { shallow, configure } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { createNewMessage } from '../../../../../../../../../utils/messages';
 import Message from '../index';
-
-configure({ adapter: new Adapter() });
+import { render } from '@testing-library/react';
 
 describe('<Message />', () => {
-  /* eslint-disable no-underscore-dangle */
-  const createMessageComponent = message => shallow(<Message message={message} />);
-
   it('should render a <strong> element', () => {
-    const message = createNewMessage('New message with **Markdown**!');
-    const messageComponent = createMessageComponent(message);
+    const { container } = render(<Message message={createNewMessage('New message with **Markdown**!')} />);
 
-    expect(
-      messageComponent.find('.rcw-message-text').getElement().props.dangerouslySetInnerHTML.__html
-    ).toMatchSnapshot();
+    expect(container.querySelector('.rcw-message-text').innerHTML).toMatchSnapshot();
   });
 
-  it('should reder a <em> element', () => {
-    const message = createNewMessage('New message with *Markdown*!');
-    const messageComponent = createMessageComponent(message);
+  it('should render a <em> element', () => {
+    const { container } = render(<Message message={createNewMessage('New message with *Markdown*!')} />);
 
-    expect(
-      messageComponent.find('.rcw-message-text').getElement().props.dangerouslySetInnerHTML.__html
-    ).toMatchSnapshot();
+    expect(container.querySelector('.rcw-message-text').innerHTML).toMatchSnapshot();
   });
-  /* eslint-enable */
 });

@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import cn from 'classnames';
 
 import Badge from './components/Badge';
@@ -25,7 +25,7 @@ function Launcher({ toggle, chatId, openImg, closeImg, openLabel, closeLabel, sh
   const { showChat, badgeCount } = useSelector((state: GlobalState) => ({
     showChat: state.behavior.showChat,
     badgeCount: state.messages.badgeCount
-  }));
+  }), { equalityFn: shallowEqual });
 
   const toggleChat = () => {
     toggle();

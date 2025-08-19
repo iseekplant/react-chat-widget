@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import {shallowEqual, useSelector} from 'react-redux';
 
 import { GlobalState, QuickButtonTypes } from 'src/store/types';
 import { AnyFunction } from 'src/utils/types';
@@ -10,7 +10,10 @@ type Props = {
 }
 
 function QuickButtons({ onQuickButtonClicked }: Props) {
-  const buttons = useSelector((state: GlobalState) => state.quickButtons.quickButtons);
+  const buttons = useSelector(
+    (state: GlobalState) => state.quickButtons.quickButtons,
+    { equalityFn: shallowEqual },
+  );
 
   const getComponentToRender = (button: QuickButtonTypes) => {
     const ComponentToRender = button.component;

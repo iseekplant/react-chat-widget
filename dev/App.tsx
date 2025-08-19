@@ -1,7 +1,6 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
-import { Widget, addResponseMessage, setQuickButtons, toggleMsgLoader, addLinkSnippet } from '../index';
-import { addUserMessage } from '..';
+import { Widget, addResponseMessage, setQuickButtons, toggleMsgLoader, addLinkSnippet, addUserMessage } from '../index';
 
 export default class App extends Component {
   componentDidMount() {
@@ -16,7 +15,10 @@ export default class App extends Component {
     setTimeout(() => {
       toggleMsgLoader();
       if (newMessage === 'fruits') {
-        setQuickButtons([ { label: 'Apple', value: 'apple' }, { label: 'Orange', value: 'orange' }, { label: 'Pear', value: 'pear' }, { label: 'Banana', value: 'banana' } ]);
+        setQuickButtons([{label: 'Apple', value: 'apple'}, {label: 'Orange', value: 'orange'}, {
+          label: 'Pear',
+          value: 'pear'
+        }, {label: 'Banana', value: 'banana'}]);
       } else {
         addResponseMessage(newMessage);
       }

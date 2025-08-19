@@ -1,6 +1,6 @@
 import { useEffect, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import usePreview from './usePreview';
 import usePortal from './usePortal';
 import './styles.scss';
@@ -34,7 +34,7 @@ export default function FullScreenPreview({ fullScreenMode, zoomStep }:Props) {
     width: state.preview.width,
     height: state.preview.height,
     visible: state.preview.visible
-  }));
+  }), { equalityFn: shallowEqual });
 
   useEffect(() => {
     if(src) {

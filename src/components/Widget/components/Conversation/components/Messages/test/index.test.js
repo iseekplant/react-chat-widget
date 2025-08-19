@@ -1,40 +1,49 @@
-import { mount, configure } from 'enzyme';
-import { Provider } from 'react-redux'
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-
-import { createNewMessage, createLinkSnippet, createComponentMessage } from '../../../../../../../utils/messages';
+import React from 'react';
+import { Provider } from 'react-redux';
+import {
+  createNewMessage,
+  createLinkSnippet,
+  createComponentMessage
+} from '../../../../../../../utils/messages';
 import { createMockStore } from '../../../../../../../utils/store';
-
 import Messages from '../index';
 import Message from '../components/Message';
 import Snippet from '../components/Snippet';
+import { render } from '@testing-library/react';
 
-configure({ adapter: new Adapter() });
+jest.mock('../components/Message');
+jest.mock('../components/Snippet');
 
 describe('<Messages />', () => {
-  /* eslint-disable react/prop-types */
-  const Dummy = ({ text }) => <div>{text}</div>;
-  /* eslint-enable */
+  const Dummy = jest.fn(({ text }) => <div>{text}</div>);
   const customComp = createComponentMessage(Dummy, { text: 'This is a Dummy Component!' });
   const message = createNewMessage('Response message 1');
   const linkSnippet = createLinkSnippet({ title: 'link', link: 'link' });
-  const mockStore =  createMockStore({ messages: {messages: [message, linkSnippet, customComp], badgeCount: 0 }})
+  const mockStore = createMockStore({
+    messages: { messages: [message, linkSnippet, customComp], badgeCount: 0 }
+  });
 
-  const messagesComponent = mount(
-    <Provider store={ mockStore }>
-      <Messages />
-    </Provider>
-  );
+  beforeEach(() => {
+    render(
+      <Provider store={mockStore}>
+        <Messages />
+      </Provider>
+    );
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('should render a Message component', () => {
-    expect(messagesComponent.find(Message)).toHaveLength(1);
+    expect(Message).toHaveBeenCalledTimes(1);
   });
 
   it('should render a Snippet component', () => {
-    expect(messagesComponent.find(Snippet)).toHaveLength(1);
+    expect(Snippet).toHaveBeenCalledTimes(1);
   });
 
   it('should render a custom component', () => {
-    expect(messagesComponent.find(Dummy)).toHaveLength(1);
+    expect(Dummy).toHaveBeenCalledTimes(1);
   });
 });
