@@ -25,11 +25,13 @@ export interface ToggleInputDisabled extends UnknownAction {}
 export interface AddUserMessage extends UnknownAction {
   text: string;
   id?: string;
+  date?: Date;
 }
 
 export interface AddResponseMessage extends UnknownAction {
   text: string;
   id?: string;
+  date?: Date;
 }
 
 export interface ToggleMsgLoader extends UnknownAction {}

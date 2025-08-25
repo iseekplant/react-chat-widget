@@ -8,6 +8,11 @@ export default class App extends Component {
     addLinkSnippet({ link: 'https://google.com', title: 'Google' });
     addResponseMessage('![](https://raw.githubusercontent.com/Wolox/press-kit/master/logos/logo_banner.png)');
     addResponseMessage('![vertical](https://d2sofvawe08yqg.cloudfront.net/reintroducing-react/hero2x?1556470143)');
+
+    let halfAnHourAgo = new Date();
+    halfAnHourAgo.setMinutes(halfAnHourAgo.getMinutes() - 30);
+
+    addResponseMessage(`this is a message from the half an hour ago.\n currently: ${new Date().toLocaleTimeString()}`, '1', halfAnHourAgo);
   }
 
   handleNewUserMessage = (newMessage: any) => {
