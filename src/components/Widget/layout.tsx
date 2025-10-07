@@ -115,8 +115,13 @@ function WidgetLayout({
   }, [imagePreview, showChat]);
 
   useEffect(() => {
-    document.body.setAttribute('style', `overflow: ${visible || fullScreenMode ? 'hidden' : 'auto'}`)
-  }, [fullScreenMode, visible])
+    const overflowValue = visible || fullScreenMode ? 'hidden' : 'auto';
+
+    document.body.setAttribute(
+        'style',
+        `${document.body.getAttribute('style')}overflow: ${overflowValue}`,
+    );
+  }, [fullScreenMode, visible]);
 
   return (
     <div
