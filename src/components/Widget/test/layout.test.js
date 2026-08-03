@@ -10,14 +10,14 @@ describe('<WidgetLayout />', () => {
     document.body.setAttribute('style', '');
   });
 
-  it('sets an overflow style on the body', () => {
+  it('does not modify body overflow when idle', () => {
     render(
       <Provider store={mockStore}>
         <WidgetLayout />
       </Provider>
     );
 
-    expect(document.body.getAttribute('style')).toBe('overflow: auto');
+    expect(document.body.getAttribute('style')).toBe('');
   });
 
   it('sets a hidden overflow style on the body when preview is visible', () => {
@@ -27,7 +27,7 @@ describe('<WidgetLayout />', () => {
       </Provider>
     );
 
-    expect(document.body.getAttribute('style')).toBe('overflow: hidden');
+    expect(document.body.style.overflow).toBe('hidden');
   });
 
   it('sets a hidden overflow style on the body when in full screen mode', () => {
@@ -37,10 +37,10 @@ describe('<WidgetLayout />', () => {
       </Provider>
     );
 
-    expect(document.body.getAttribute('style')).toBe('overflow: hidden');
+    expect(document.body.style.overflow).toBe('hidden');
   });
 
-  it('keeps existing inline styles when adding the overflow style', () => {
+  it('does not modify existing inline styles when idle', () => {
     document.body.setAttribute('style', 'margin: 0;');
 
     render(
@@ -49,6 +49,24 @@ describe('<WidgetLayout />', () => {
       </Provider>
     );
 
-    expect(document.body.getAttribute('style')).toBe('margin: 0;overflow: auto');
+    expect(document.body.getAttribute('style')).toBe('margin: 0;');
+  });
+
+  it('restores original overflow when preview closes', () => {
+    const { rerender } = render(
+      <Provider store={createMockStore({ preview: { visible: true } })}>
+        <WidgetLayout />
+      </Provider>
+    );
+
+    expect(document.body.style.overflow).toBe('hidden');
+
+    rerender(
+      <Provider store={mockStore}>
+        <WidgetLayout />
+      </Provider>
+    );
+
+    expect(document.body.style.overflow).toBe('');
   });
 });
